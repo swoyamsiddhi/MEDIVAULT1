@@ -1,0 +1,5 @@
+{
+  "name": "MediVault",
+  "description": "A personal AI health vault for analyzing, storing, and tracking medical scans and reports using Gemini AI.",
+  "requestFramePermissions": []
+}
