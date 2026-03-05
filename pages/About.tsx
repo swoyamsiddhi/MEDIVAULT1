@@ -185,9 +185,8 @@ const FloatingTechCard = ({ tech, index }: any) => {
         <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            viewport={{ once: true }}
             animate={{ y: [0, -10, 0] }}
-            // @ts-ignore - framer-motion types issue with transition loop
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.5 }}
             className="relative group w-48 h-32"
         >
