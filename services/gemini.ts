@@ -5,7 +5,17 @@ import { AnalysisData, ComparisonResult, Scan } from "../types";
 // This is for demonstration purposes within the constraints.
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || '';
 
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+// Lazy initialization to prevent crash when API key is not set
+let _ai: GoogleGenAI | null = null;
+const getAI = (): GoogleGenAI => {
+    if (!API_KEY) {
+        throw new Error("Gemini API key is not configured. Please set VITE_GEMINI_API_KEY in your environment variables.");
+    }
+    if (!_ai) {
+        _ai = new GoogleGenAI({ apiKey: API_KEY });
+    }
+    return _ai;
+};
 
 export const geminiService = {
     analyzeScan: async (imageBase64: string, category: string): Promise<AnalysisData> => {
@@ -25,7 +35,7 @@ export const geminiService = {
     `;
 
         try {
-            const response = await ai.models.generateContent({
+            const response = await getAI().models.generateContent({
                 model: 'gemini-flash-latest',
                 contents: {
                     parts: [
@@ -100,7 +110,7 @@ export const geminiService = {
     `;
 
         try {
-            const response = await ai.models.generateContent({
+            const response = await getAI().models.generateContent({
                 model: 'gemini-flash-latest',
                 contents: prompt,
                 config: {
