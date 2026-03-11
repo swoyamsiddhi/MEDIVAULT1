@@ -80,7 +80,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         if (!response.ok) {
             const errorData = await response.text();
             console.error('Gemini API error:', errorData);
-            return res.status(response.status).json({ error: 'Gemini API request failed.' });
+            let errorMessage = 'Gemini API request failed.';
+            try {
+                const parsed = JSON.parse(errorData);
+                errorMessage = parsed?.error?.message || errorMessage;
+            } catch {}
+            return res.status(response.status).json({ error: errorMessage });
         }
 
         const data = await response.json();

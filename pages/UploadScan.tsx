@@ -110,7 +110,8 @@ const UploadScan: React.FC<UploadScanProps> = ({ category, navigate }) => {
 
         } catch (err: any) {
             console.error(err);
-            setError("Failed to analyze image. Please ensure API key is set and image is clear.");
+            const message = err?.message || "Unknown error";
+            setError(`Analysis failed: ${message}`);
         } finally {
             setIsAnalyzing(false);
         }
