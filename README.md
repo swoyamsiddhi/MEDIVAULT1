@@ -102,6 +102,7 @@ MEDIVAULT/
 ├── App.tsx             # Main app with routing & auth logic
 ├── types.ts            # TypeScript interfaces & enums
 ├── vite.config.ts      # Vite configuration
+├── .env.example        # Environment variable template
 ├── components/
 │   ├── Navbar.tsx      # Navigation bar with auth state
 │   └── Footer.tsx      # Site footer
@@ -114,7 +115,7 @@ MEDIVAULT/
 │   ├── CompareMode.tsx # Side-by-side scan comparison
 │   └── About.tsx       # About / How it works page
 ├── services/
-│   ├── gemini.ts       # Google Gemini AI integration
+│   ├── gemini.ts       # Google Gemini AI integration (direct API calls)
 │   ├── auth.ts         # Authentication service
 │   └── mockDb.ts       # Local mock database
 └── assets/
@@ -134,21 +135,22 @@ MEDIVAULT/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/MEDIVAULT.git
-cd MEDIVAULT
+git clone https://github.com/swoyamsiddhi/MEDIVAULT1.git
+cd MEDIVAULT1
 
 # 2. Install dependencies
 npm install
 
 # 3. Set up environment variables
-# Create a .env file and add your Gemini API key:
-echo "GEMINI_API_KEY=your_api_key_here" > .env
+cp .env.example .env.local
+# Edit .env.local and add your Gemini API key:
+# VITE_GEMINI_API_KEY=your_api_key_here
 
 # 4. Start the development server
 npm run dev
 ```
 
-The app will be running at **http://localhost:5173** 🎉
+The app will be running at **http://localhost:3000** 🎉
 
 ---
 
@@ -156,9 +158,9 @@ The app will be running at **http://localhost:5173** 🎉
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `GEMINI_API_KEY` | Google Gemini AI API key for scan analysis | ✅ Yes |
+| `VITE_GEMINI_API_KEY` | Google Gemini AI API key for scan analysis | ✅ Yes |
 
-> **Note:** On **Vercel**, add this variable in **Settings → Environment Variables**. Locally, create a `.env` file in the project root.
+> **How to get an API key:** Visit [Google AI Studio](https://aistudio.google.com/apikey) and click "Create API Key".
 
 ---
 
